@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using these metadata."
+type: software
+title: "How badly can column-pivoted QR choose rows of an orthonormal basis? The sharp stretched-exponential worst case"
+abstract: "Unrefereed research candidate. Column-pivoted QR (QRCP) applied to Q*, where Q is an N x k matrix with orthonormal columns, is the standard way to select k interpolation points (for example in DEIM). Its quality is gamma = ||Q(I,:)^{-1}||_2; a selection with gamma <= sqrt(k(N-k+1)) always exists, while the classical guarantee for QRCP grows like 2^k. Chen, Liu, He and Dong answered Problem 4.3 of Amsel et al. negatively, and their construction already gives growth exp(c sqrt k). This work determines the worst case on the logarithmic scale: if the coherence is at most H, every legal QRCP selection has gamma <= sqrt(e(N-k+1)) exp(C(H) sqrt k), with an explicit constant C(H) (C(1) = 2), and matching examples show that C(H) cannot be lowered (at H = 1 under the smallest-label tie rule). Without any assumption the worst case is exp(Theta(sqrt(k log(N/k)))) once N >= k^(2+eps). An a posteriori bound from the observed pivots has an optimal coefficient. Exact arithmetic and worst cases only."
+authors:
+  - name: "Anonymous"
+version: "0.1.0-candidate"
+date-released: "2026-11-16"
+doi: "10.5281/zenodo.24278831"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24278831"
+    description: "This version"
+  - type: doi
+    value: "10.5281/zenodo.24278830"
+    description: "All versions (concept DOI)"
+repository-code: "https://github.com/ipitchford/column-pivoted-qr-orthonormal-worst-case"
+url: "https://evidencepress.org/releases/column-pivoted-qr-orthonormal-worst-case/"
+license: CC0-1.0
+keywords:
+  - column-pivoted QR
+  - discrete empirical interpolation
+  - DEIM
+  - coherence
+  - Kahan matrix
+  - worst-case analysis
+preferred-citation:
+  type: article
+  title: "How badly can column-pivoted QR choose rows of an orthonormal basis? The sharp stretched-exponential worst case"
+  authors:
+    - name: "Anonymous"
+  year: 2026
+  doi: "10.5281/zenodo.24278831"
+  publisher:
+    name: "Zenodo"
+  notes: "Version 0.1.0-candidate; unrefereed"

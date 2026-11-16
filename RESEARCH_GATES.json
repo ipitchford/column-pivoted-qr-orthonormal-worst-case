@@ -1,0 +1,222 @@
+{
+ "schemaVersion": "1.0",
+ "provenance": "Compiled 16 November 2026 for 0.1.0-candidate from the dated searches of the internal AI-assisted review (16 November 2026), the corpus overlap check, the reference records in refs.bib, REVIEW_SUMMARY.md and the paper's own positioning (Section 1.2 and Remark 2.5). It records scrutiny performed, not historical priority.",
+ "contributionMap": [
+  {
+   "claim": "Theorem 2.3 (upper bound): mu(Q) <= H implies gamma <= sqrt(e(N-k+1)) exp(C(H) sqrt k) for every legal QRCP selection on orthonormal rows",
+   "unit": "statement",
+   "paperLocation": "Theorem 2.3; Sections 3-4",
+   "searches": [
+    {
+     "date": "2026-11-16",
+     "corpus": "web search; arXiv; Semantic Scholar citation graph (forward citations of arXiv:2606.02484: five citing papers, none on the rate); Evidence Press release corpus (site papers/)",
+     "query": "column pivoted QR inverse triangular factor bound exp(sqrt(k)) subexponential; pivoted Cholesky Kahan worst case stretched exponential; Q-DEIM/QRCP orthonormal improved 4^k bound; r_11/r_kk ratio inverse bounds; Lebesgue constants of greedy, Leja and approximate Fekete points; EIM 2^M improvements; QR pivoting, DEIM, rank-revealing and Kahan matrices in the Evidence Press corpus"
+    },
+    {
+     "date": "2026-11-16",
+     "corpus": "as above, re-checked by the internal reviewers during the revision round; formula fingerprints (code/fingerprints.py)",
+     "query": "scaled triangular inverse estimates (Drmac-Veselic Proposition 3.1); Engler QR column pivoting orthonormal; Lambert W form rho = -W_{-1}(-1/(eH)) of the constant; sqrt(k log N) law for greedy subset selection"
+    }
+   ],
+   "closestPriorWork": "Drmac-Gugercin Theorem 2.1 (2^k growth); Drmac-Veselic scaled triangular analysis (different quantity)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "the paper says 'to our knowledge'; MathSciNet and zbMATH not queried"
+  },
+  {
+   "claim": "Theorem 2.3 (sharpness): lim log G_k(H)/sqrt k = C(H), with generalised Kahan examples; at H = 1 under the smallest-label tie rule",
+   "unit": "statement",
+   "paperLocation": "Theorem 2.3; Sections 5-6; Appendix A",
+   "searches": [
+    {
+     "date": "2026-11-16",
+     "corpus": "web search; arXiv; Semantic Scholar citation graph (forward citations of arXiv:2606.02484: five citing papers, none on the rate); Evidence Press release corpus (site papers/)",
+     "query": "column pivoted QR inverse triangular factor bound exp(sqrt(k)) subexponential; pivoted Cholesky Kahan worst case stretched exponential; Q-DEIM/QRCP orthonormal improved 4^k bound; r_11/r_kk ratio inverse bounds; Lebesgue constants of greedy, Leja and approximate Fekete points; EIM 2^M improvements; QR pivoting, DEIM, rank-revealing and Kahan matrices in the Evidence Press corpus"
+    },
+    {
+     "date": "2026-11-16",
+     "corpus": "as above, re-checked by the internal reviewers during the revision round; formula fingerprints (code/fingerprints.py)",
+     "query": "scaled triangular inverse estimates (Drmac-Veselic Proposition 3.1); Engler QR column pivoting orthonormal; Lambert W form rho = -W_{-1}(-1/(eH)) of the constant; sqrt(k log N) law for greedy subset selection"
+    }
+   ],
+   "closestPriorWork": "Chen, Liu, He and Dong, arXiv:2606.02484, Theorem 2 and Lemma 24 (first negative answer to Problem 4.3; exp(c sqrt k) growth for c < (1/2) sqrt(log H)); Kahan 1966 (triangular matrix)",
+   "verdict": "known-cited",
+   "verdictNote": "the stretched-exponential order is credited to Chen et al.; the exact constant C(H), the matching profile and the H = 1 endpoint are claimed as new"
+  },
+  {
+   "claim": "Corollary 2.6, Theorem 2.7 and Corollary 2.8: coherence-free bound and the law exp(Theta(sqrt(k log(N/k)))) for N >= k^(2+eps), with the exact constant when log N/log k -> infinity",
+   "unit": "statement",
+   "paperLocation": "Corollary 2.6; Theorem 2.7; Corollary 2.8; Section 7",
+   "searches": [
+    {
+     "date": "2026-11-16",
+     "corpus": "web search; arXiv; Semantic Scholar citation graph (forward citations of arXiv:2606.02484: five citing papers, none on the rate); Evidence Press release corpus (site papers/)",
+     "query": "column pivoted QR inverse triangular factor bound exp(sqrt(k)) subexponential; pivoted Cholesky Kahan worst case stretched exponential; Q-DEIM/QRCP orthonormal improved 4^k bound; r_11/r_kk ratio inverse bounds; Lebesgue constants of greedy, Leja and approximate Fekete points; EIM 2^M improvements; QR pivoting, DEIM, rank-revealing and Kahan matrices in the Evidence Press corpus"
+    },
+    {
+     "date": "2026-11-16",
+     "corpus": "as above, re-checked by the internal reviewers during the revision round; formula fingerprints (code/fingerprints.py)",
+     "query": "scaled triangular inverse estimates (Drmac-Veselic Proposition 3.1); Engler QR column pivoting orthonormal; Lambert W form rho = -W_{-1}(-1/(eH)) of the constant; sqrt(k log N) law for greedy subset selection"
+    }
+   ],
+   "closestPriorWork": "none found for QRCP; Totik's results on continuous Leja sequences concern a different object",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "added in the revision round as an extension"
+  },
+  {
+   "claim": "Theorem 7.1 and Proposition 7.2: a posteriori bound gamma <= (sqrt e/d_k) exp(sqrt((k-1)L)) with optimal coefficient",
+   "unit": "statement",
+   "paperLocation": "Theorem 7.1; Proposition 7.2",
+   "searches": [
+    {
+     "date": "2026-11-16",
+     "corpus": "as above, re-checked by the internal reviewers during the revision round; formula fingerprints (code/fingerprints.py)",
+     "query": "scaled triangular inverse estimates (Drmac-Veselic Proposition 3.1); Engler QR column pivoting orthonormal; Lambert W form rho = -W_{-1}(-1/(eH)) of the constant; sqrt(k log N) law for greedy subset selection"
+    }
+   ],
+   "closestPriorWork": "classical r_11/r_kk-type estimates for triangular inverses",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "stated with an optimal leading coefficient; the paper claims no more"
+  },
+  {
+   "claim": "Method: simultaneous trailing-energy constraints from greedy pivoting, a shaped diagonal similarity and a determinant/Frobenius estimate for the triangular inverse (upper bound); generalised Kahan cores with a two-part diagonal profile completed to orthonormal matrices by small columns (lower bound)",
+   "unit": "method",
+   "paperLocation": "Sections 3-6; Appendix A",
+   "searches": [
+    {
+     "date": "2026-11-16",
+     "corpus": "web search; arXiv; Semantic Scholar citation graph (forward citations of arXiv:2606.02484: five citing papers, none on the rate); Evidence Press release corpus (site papers/)",
+     "query": "column pivoted QR inverse triangular factor bound exp(sqrt(k)) subexponential; pivoted Cholesky Kahan worst case stretched exponential; Q-DEIM/QRCP orthonormal improved 4^k bound; r_11/r_kk ratio inverse bounds; Lebesgue constants of greedy, Leja and approximate Fekete points; EIM 2^M improvements; QR pivoting, DEIM, rank-revealing and Kahan matrices in the Evidence Press corpus"
+    },
+    {
+     "date": "2026-11-16",
+     "corpus": "as above, re-checked by the internal reviewers during the revision round; formula fingerprints (code/fingerprints.py)",
+     "query": "scaled triangular inverse estimates (Drmac-Veselic Proposition 3.1); Engler QR column pivoting orthonormal; Lambert W form rho = -W_{-1}(-1/(eH)) of the constant; sqrt(k log N) law for greedy subset selection"
+    }
+   ],
+   "closestPriorWork": "entrywise greedy inequalities (Drmac-Gugercin); pivot floor (Engler 1997); determinant estimate (classical; Lemma 3.3, own proof, no novelty claimed); Kahan-plus-completion constructions (Kahan 1966; Chen et al.)",
+   "verdict": "known-cited",
+   "verdictNote": "the ingredients are cited or classical; novelty is claimed only for the statements above and their combination"
+  }
+ ],
+ "sourcesReadInFull": [
+  {
+   "citation": "Chen, L., Liu, Z., He, W. and Dong, B. (2026), Iteris: agentic research loops for computational mathematics, arXiv:2606.02484v1",
+   "usedFor": "first negative answer to Problem 4.3; Theorem 2, Appendix B, Lemmas 23-25 behind Remark 2.5",
+   "readWhat": "whole paper, Appendix B in detail",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://arxiv.org/abs/2606.02484"
+  },
+  {
+   "citation": "Amsel, N. et al. (2026), Linear systems and eigenvalue problems: open questions from a Simons workshop, arXiv:2602.05394 (versions 1 and 3)",
+   "usedFor": "Problem 4.3, existence scale, version 3 updates",
+   "readWhat": "Section 4.1.2 and Problem 4.3 in both versions",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://arxiv.org/abs/2602.05394v3"
+  },
+  {
+   "citation": "Drmac, Z. and Gugercin, S. (2016), A new selection operator for the discrete empirical interpolation method, SIAM J. Sci. Comput. 38(2), A631-A648 (preprint arXiv:1505.00370v2)",
+   "usedFor": "classical 2^k bound (Theorem 2.1, eq. 2.1); pivoted-Cholesky equivalence",
+   "readWhat": "whole preprint",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://doi.org/10.1137/15M1019271"
+  },
+  {
+   "citation": "Damle, A. (2026), Computing strong rank-revealing factorizations for matrices with orthonormal rows, arXiv:2607.13532v1",
+   "usedFor": "Theorem 3.1 and Corollary 3.2 (Bischof-Stewart pivoting)",
+   "readWhat": "whole paper",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://arxiv.org/abs/2607.13532"
+  },
+  {
+   "citation": "Engler, H. (1997), The behavior of the QR-factorization algorithm with column pivoting, Appl. Math. Lett. 10(6), 7-11",
+   "usedFor": "pivot floor (Lemma 3.1), average determinant, Hadamard completions",
+   "readWhat": "whole paper",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://doi.org/10.1016/S0893-9659(97)00098-0"
+  },
+  {
+   "citation": "Kahan, W. (1966), Numerical linear algebra, Canad. Math. Bull. 9(5), 757-801",
+   "usedFor": "Kahan matrix and its inverse (Section 5)",
+   "readWhat": "Section 5",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://doi.org/10.4153/CMB-1966-083-2"
+  },
+  {
+   "citation": "Sra, S. (as Count ex Machina) (2026), GPT, the counterexample machine, arXiv:2608.29595v1",
+   "usedFor": "finite exact example k = 3, N = 8 (Appendix A.5)",
+   "readWhat": "Appendix A.5",
+   "date": "2026-11-16",
+   "evidenceLocator": "https://arxiv.org/abs/2608.29595"
+  }
+ ],
+ "limitationTriage": [
+  {
+   "limitation": "Worst case at a fixed aspect ratio N <= alpha k unknown",
+   "closingQuestion": "Does exp(c sqrt k) growth occur when N is a fixed multiple of k?",
+   "triedOrSearched": "attempted in the revision round; not landed",
+   "estimatedCost": "research-level",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9, open problem 1; Remark 7.4",
+   "whyNotClosedNow": "hard; stated plainly in the paper and on the page"
+  },
+  {
+   "limitation": "A factor polynomial in k remains between the bounds at fixed H; sqrt(alpha-2) to sqrt(alpha-1) window at N = k^alpha",
+   "closingQuestion": "What is the O(log k) term, and can the window be closed?",
+   "triedOrSearched": "window attempted (needs a completion with first pivot near one); not landed",
+   "estimatedCost": "research-level",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9, open problems 2 and 3",
+   "whyNotClosedNow": "outside the scope of this release"
+  },
+  {
+   "limitation": "Exact arithmetic only; floating-point QRCP, tolerance pivoting and perturbed data not analysed",
+   "closingQuestion": "Do the bounds survive approximate pivots?",
+   "triedOrSearched": "not attempted",
+   "estimatedCost": "days",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9 scope",
+   "whyNotClosedNow": "separate analysis needed"
+  },
+  {
+   "limitation": "Computational checks could be vacuous under optimisation or share an error with the text",
+   "closingQuestion": "Do the checks fail when a constant is wrong?",
+   "triedOrSearched": "checks raise SystemExit without assert; a negative control (constant 3 changed to 1 in inequality (7.5)) exits 1 under -O; verify.py rebuilds a retained failed candidate and requires its rejection",
+   "estimatedCost": "minutes",
+   "cheap": true,
+   "decision": "CLOSED",
+   "reasonOpen": "",
+   "whyNotClosedNow": ""
+  },
+  {
+   "limitation": "Priority rests on a literature search of limited scope",
+   "closingQuestion": "Would indexed databases change attribution?",
+   "triedOrSearched": "web, arXiv, Semantic Scholar citation graph, Evidence Press corpus",
+   "estimatedCost": "subscription indexes",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "MathSciNet and zbMATH not queried",
+   "whyNotClosedNow": "recorded here; the paper says 'to our knowledge'"
+  }
+ ],
+ "extensionScout": {
+  "by": "five internal reviewer agents and an adversarial review by a second AI model",
+  "date": "2026-11-16",
+  "proposals": [
+   "coherence-free two-parameter law in N and k",
+   "fixed aspect ratio N = alpha k",
+   "finite-k tables and comparison with the classical bound",
+   "50-digit checks of C(H) and of the new inequalities",
+   "approximate pivoting and floating point"
+  ],
+  "actions": [
+   "done: Corollary 2.6, Theorem 2.7, Corollary 2.8",
+   "attempted, not landed; stated as open",
+   "done: Tables 1-2, Figure 1, Section 9",
+   "done: code/check_extensions.py",
+   "not attempted; stated as open"
+  ]
+ }
+}

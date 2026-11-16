@@ -1,0 +1,448 @@
+{
+  "schema_version": 1,
+  "purpose": "Known-object identification fingerprints for the novelty gate",
+  "epistemic_status": "The matrices and geometric inverse-entry sequence are classical Kahan ingredients. These finite fingerprints make no originality claim and do not establish novelty of the sharp coherence theorem.",
+  "arithmetic": "Exact SymPy rational arithmetic",
+  "sympy_version": "1.14.0",
+  "object_definition": {
+    "family": "Untapered upper-triangular Kahan core K=D T",
+    "c": "3/5",
+    "s": "4/5",
+    "relation": "c^2+s^2=1",
+    "indices": "One-based mathematical indices",
+    "entries": "K_ii=s^(i-1); K_ij=-c*s^(i-1) for i<j; K_ij=0 for i>j",
+    "distinction": "These are the known untapered cores, not the completed Parseval examples."
+  },
+  "hash_specification": {
+    "algorithm": "SHA-256",
+    "encoding": "UTF-8",
+    "serialisation": "JSON object with keys rows, columns and entries, sorted keys, ASCII strings, no whitespace, and every exact rational in reduced SymPy string form. The original serialisation is included.",
+    "transform_definitions": {
+      "identity": "K",
+      "transpose": "K^T",
+      "row_reversal": "J K",
+      "column_reversal": "K J",
+      "row_and_column_reversal": "J K J",
+      "anti_diagonal_transpose": "J K^T J",
+      "J": "Order-k reversal permutation matrix J_ij=1 iff i+j=k+1"
+    },
+    "limitation": "Hashes certify equality of canonical finite encodings only."
+  },
+  "fingerprints": [
+    {
+      "order": 2,
+      "matrix": [
+        [
+          "1",
+          "-3/5"
+        ],
+        [
+          "0",
+          "4/5"
+        ]
+      ],
+      "trace": "9/5",
+      "determinant": "4/5",
+      "characteristic_polynomial": {
+        "variable": "x",
+        "expanded": "x**2 - 9*x/5 + 4/5",
+        "factorised": "(x - 1)*(5*x - 4)/5",
+        "coefficients_descending": [
+          "1",
+          "-9/5",
+          "4/5"
+        ]
+      },
+      "eigenvalues": [
+        {
+          "value": "4/5",
+          "algebraic_multiplicity": 1
+        },
+        {
+          "value": "1",
+          "algebraic_multiplicity": 1
+        }
+      ],
+      "row_sums": [
+        "2/5",
+        "4/5"
+      ],
+      "column_sums": [
+        "1",
+        "1/5"
+      ],
+      "sorted_entries_with_repetitions": [
+        "-3/5",
+        "0",
+        "4/5",
+        "1"
+      ],
+      "entry_multiplicities_in_increasing_order": {
+        "-3/5": 1,
+        "0": 1,
+        "4/5": 1,
+        "1": 1
+      },
+      "rank": 2,
+      "nonzero_pattern": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "zero_positions_one_based": [
+        [
+          2,
+          1
+        ]
+      ],
+      "canonical_matrix_serialisation": "{\"columns\":2,\"entries\":[[\"1\",\"-3/5\"],[\"0\",\"4/5\"]],\"rows\":2}",
+      "exact_matrix_sha256": {
+        "identity": "22d336576fca8fd0b2ab83ccc9e3abf065faef14df01ac107d3ef2d37bac4a2b",
+        "transpose": "9fc935aad60fa07635154b3120c9769a074d23a965d8a5a7ea1668ea654111e7",
+        "row_reversal": "4d2fd9caebc07e3fa65d10777cb356b567d5dc9d008c96bfeb311e1ec6636784",
+        "column_reversal": "cf80d16d73807a4d7eccaf177bccc3e118e704524dbf4220532e740a2d83bb70",
+        "row_and_column_reversal": "40710c933f42bce372212965edc5881defe6089ceafcbd850093df3e10031417",
+        "anti_diagonal_transpose": "0c81bf041d7c89016f019a50b1fa54ccddef5c26f75b8fa181f8214a221589d4"
+      },
+      "inverse_top_right_entry": "3/4"
+    },
+    {
+      "order": 3,
+      "matrix": [
+        [
+          "1",
+          "-3/5",
+          "-3/5"
+        ],
+        [
+          "0",
+          "4/5",
+          "-12/25"
+        ],
+        [
+          "0",
+          "0",
+          "16/25"
+        ]
+      ],
+      "trace": "61/25",
+      "determinant": "64/125",
+      "characteristic_polynomial": {
+        "variable": "x",
+        "expanded": "x**3 - 61*x**2/25 + 244*x/125 - 64/125",
+        "factorised": "(x - 1)*(5*x - 4)*(25*x - 16)/125",
+        "coefficients_descending": [
+          "1",
+          "-61/25",
+          "244/125",
+          "-64/125"
+        ]
+      },
+      "eigenvalues": [
+        {
+          "value": "16/25",
+          "algebraic_multiplicity": 1
+        },
+        {
+          "value": "4/5",
+          "algebraic_multiplicity": 1
+        },
+        {
+          "value": "1",
+          "algebraic_multiplicity": 1
+        }
+      ],
+      "row_sums": [
+        "-1/5",
+        "8/25",
+        "16/25"
+      ],
+      "column_sums": [
+        "1",
+        "1/5",
+        "-11/25"
+      ],
+      "sorted_entries_with_repetitions": [
+        "-3/5",
+        "-3/5",
+        "-12/25",
+        "0",
+        "0",
+        "0",
+        "16/25",
+        "4/5",
+        "1"
+      ],
+      "entry_multiplicities_in_increasing_order": {
+        "-3/5": 2,
+        "-12/25": 1,
+        "0": 3,
+        "16/25": 1,
+        "4/5": 1,
+        "1": 1
+      },
+      "rank": 3,
+      "nonzero_pattern": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "zero_positions_one_based": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "canonical_matrix_serialisation": "{\"columns\":3,\"entries\":[[\"1\",\"-3/5\",\"-3/5\"],[\"0\",\"4/5\",\"-12/25\"],[\"0\",\"0\",\"16/25\"]],\"rows\":3}",
+      "exact_matrix_sha256": {
+        "identity": "423a05c92517aaef96dadbff868435dadd2307a833bd9fe0c53d6f062b55ea80",
+        "transpose": "07a4b8591e549f6bcd36b13e96cb3ad70bc696b8fb452f9bd48668336fb55bfc",
+        "row_reversal": "24a4bbbfab7939216e7b85957c9c7a795eb722a54255d2e4dd5c4d59a789495a",
+        "column_reversal": "eebadf8fa0cedf6d0ac24e588493262cc3fd195201ee1864ec83899d1b5686f8",
+        "row_and_column_reversal": "bdc946082e0d2eb032ef2dd3fe9a2fa3a28ed67c74d09413a325969015725c52",
+        "anti_diagonal_transpose": "8c3f29d56c2076cc73b3a8a71eb050c5803400eaca4ee271fc95586203009af8"
+      },
+      "inverse_top_right_entry": "3/2"
+    },
+    {
+      "order": 4,
+      "matrix": [
+        [
+          "1",
+          "-3/5",
+          "-3/5",
+          "-3/5"
+        ],
+        [
+          "0",
+          "4/5",
+          "-12/25",
+          "-12/25"
+        ],
+        [
+          "0",
+          "0",
+          "16/25",
+          "-48/125"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "64/125"
+        ]
+      ],
+      "trace": "369/125",
+      "determinant": "4096/15625",
+      "characteristic_polynomial": {
+        "variable": "x",
+        "expanded": "x**4 - 369*x**3/125 + 10004*x**2/3125 - 23616*x/15625 + 4096/15625",
+        "factorised": "(x - 1)*(5*x - 4)*(25*x - 16)*(125*x - 64)/15625",
+        "coefficients_descending": [
+          "1",
+          "-369/125",
+          "10004/3125",
+          "-23616/15625",
+          "4096/15625"
+        ]
+      },
+      "eigenvalues": [
+        {
+          "value": "64/125",
+          "algebraic_multiplicity": 1
+        },
+        {
+          "value": "16/25",
+          "algebraic_multiplicity": 1
+        },
+        {
+          "value": "4/5",
+          "algebraic_multiplicity": 1
+        },
+        {
+          "value": "1",
+          "algebraic_multiplicity": 1
+        }
+      ],
+      "row_sums": [
+        "-4/5",
+        "-4/25",
+        "32/125",
+        "64/125"
+      ],
+      "column_sums": [
+        "1",
+        "1/5",
+        "-11/25",
+        "-119/125"
+      ],
+      "sorted_entries_with_repetitions": [
+        "-3/5",
+        "-3/5",
+        "-3/5",
+        "-12/25",
+        "-12/25",
+        "-48/125",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "64/125",
+        "16/25",
+        "4/5",
+        "1"
+      ],
+      "entry_multiplicities_in_increasing_order": {
+        "-3/5": 3,
+        "-12/25": 2,
+        "-48/125": 1,
+        "0": 6,
+        "64/125": 1,
+        "16/25": 1,
+        "4/5": 1,
+        "1": 1
+      },
+      "rank": 4,
+      "nonzero_pattern": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "zero_positions_one_based": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "canonical_matrix_serialisation": "{\"columns\":4,\"entries\":[[\"1\",\"-3/5\",\"-3/5\",\"-3/5\"],[\"0\",\"4/5\",\"-12/25\",\"-12/25\"],[\"0\",\"0\",\"16/25\",\"-48/125\"],[\"0\",\"0\",\"0\",\"64/125\"]],\"rows\":4}",
+      "exact_matrix_sha256": {
+        "identity": "72d9d7e41ab0475a55d67731302aa2a28d1eaebdeba2f49d6463ff7dce96524d",
+        "transpose": "dc0e93ab821e451384538c677705dbd480a6e59b5154f0d215c20c49557520da",
+        "row_reversal": "3950b614badd496326c1d805e02705d330eb8baeda088390b520a60e948dabf1",
+        "column_reversal": "528cadfedda85b49b84fe46bae6195c266b86b325caad8d3c67531e348a32176",
+        "row_and_column_reversal": "cdc218f0a0692232c0db4ab8887d0c62f23cef5d913fc07eb96563176247aae5",
+        "anti_diagonal_transpose": "55b371198822bef0def08ae699eb7bb9343e159ea461bf43cd773a0175592e70"
+      },
+      "inverse_top_right_entry": "3"
+    }
+  ],
+  "known_inverse_entry_sequence": {
+    "entry": "a_k=(K_k^(-1))_(1,k), k>=2",
+    "formula": "c*(1+c)^(k-2)/s^(k-1)=(3/4)*2^(k-2)",
+    "values": [
+      {
+        "rank": 2,
+        "inverse_top_right_entry": "3/4"
+      },
+      {
+        "rank": 3,
+        "inverse_top_right_entry": "3/2"
+      },
+      {
+        "rank": 4,
+        "inverse_top_right_entry": "3"
+      },
+      {
+        "rank": 5,
+        "inverse_top_right_entry": "6"
+      },
+      {
+        "rank": 6,
+        "inverse_top_right_entry": "12"
+      },
+      {
+        "rank": 7,
+        "inverse_top_right_entry": "24"
+      },
+      {
+        "rank": 8,
+        "inverse_top_right_entry": "48"
+      },
+      {
+        "rank": 9,
+        "inverse_top_right_entry": "96"
+      }
+    ],
+    "constant_ratio": "2",
+    "ordinary_generating_functions": {
+      "shifted_index": {
+        "definition": "sum_(n>=0) a_(n+2) x^n",
+        "rational_function": "3/(4*(1-2*x))"
+      },
+      "rank_index": {
+        "definition": "sum_(k>=2) a_k x^k",
+        "rational_function": "3*x^2/(4*(1-2*x))"
+      },
+      "interpretation": "Formal power series; analytically convergent for |x|<1/2."
+    },
+    "novelty_status": "Known geometric sequence from the classical Kahan inverse identity."
+  }
+}

@@ -1,0 +1,107 @@
+# SPDX-License-Identifier: MIT
+name: Replay
+on:
+  push:
+  pull_request:
+jobs:
+  quick:
+    name: Manifest; three check scripts under python -O compared with the recorded outputs; negative control (blocking)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check MANIFEST.sha256
+        run: sha256sum -c MANIFEST.sha256
+      - name: Install pinned versions
+        run: python3 -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 sympy==1.14.0 mpmath==1.3.0
+      - name: Write the comparator (declared cross-platform policy)
+        run: |
+          cat > "$RUNNER_TEMP/compare_verification.py" <<'PY'
+          """Compare a replayed results/verification.json with the recorded one under the declared cross-platform policy:
+          structure, booleans, integers and non-numeric strings (including exact rationals) exactly; JSON numbers within relative
+          1e-9 (absolute floor 1e-12); decimal numeric strings within relative 1e-12; every relative_disagreement field below 2e-14
+          in both files; fields that record time, interpreter, platform or solver bookkeeping ignored.
+          Usage: compare_verification.py RECORDED REPLAYED. Exit 0 if equivalent, 1 otherwise (no assert)."""
+          import json, math, re, sys
+          IGNORE = {'run_utc', 'elapsed_seconds', 'versions', 'vector_arithmetic', 'root_solver_evaluations', 'root_solver_message'}
+          DEC = re.compile(r'-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?')
+          rec, new = json.load(open(sys.argv[1])), json.load(open(sys.argv[2]))
+          bad, n = [], {'num': 0, 'numstr': 0, 'disagreement': 0}
+          def walk(a, b, p, key=''):
+              if isinstance(a, dict) and isinstance(b, dict):
+                  for k in sorted(set(a) | set(b)):
+                      if k in IGNORE: continue
+                      if k not in a or k not in b: bad.append(f'missing key {p}/{k}'); continue
+                      walk(a[k], b[k], f'{p}/{k}', k)
+              elif isinstance(a, list) and isinstance(b, list):
+                  if len(a) != len(b): bad.append(f'length {p}'); return
+                  for i, (u, v) in enumerate(zip(a, b)): walk(u, v, f'{p}[{i}]', key)
+              elif isinstance(a, bool) or isinstance(b, bool):
+                  if a is not b: bad.append(f'bool {p}: {a} vs {b}')
+              elif isinstance(a, (int, float)) and isinstance(b, (int, float)):
+                  n['num'] += 1
+                  if isinstance(a, int) and isinstance(b, int):
+                      if a != b: bad.append(f'int {p}: {a} vs {b}')
+                  elif not math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-12): bad.append(f'number {p}: {a} vs {b}')
+              elif isinstance(a, str) and isinstance(b, str) and key == 'relative_disagreement':
+                  n['disagreement'] += 1
+                  if not (float(a) < 2e-14 and float(b) < 2e-14): bad.append(f'disagreement {p}: {a} vs {b}')
+              elif isinstance(a, str) and isinstance(b, str) and DEC.fullmatch(a) and DEC.fullmatch(b) and a != b:
+                  n['numstr'] += 1
+                  fa, fb = float(a), float(b)
+                  if not math.isclose(fa, fb, rel_tol=1e-12, abs_tol=1e-300): bad.append(f'numeric string {p}: {a} vs {b}')
+              elif a != b or type(a) is not type(b):
+                  bad.append(f'value {p}: {str(a)[:60]} vs {str(b)[:60]}')
+          walk(rec, new, '')
+          if new.get('passed') is not True: bad.append('replayed run did not pass')
+          if bad: print('MISMATCH', sys.argv[2], len(bad), bad[:20]); sys.exit(1)
+          print(f"equivalent: {sys.argv[2]} ({n['num']} numbers within rel 1e-9/abs 1e-12; {n['numstr']} differing numeric strings within rel 1e-12; {n['disagreement']} relative_disagreement fields < 2e-14; everything else exact; ignored {sorted(IGNORE)})")
+          PY
+      - name: Run the check scripts under -O in a copy; run the negative controls
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          pkg="$RUNNER_TEMP/pkg"; neg="$RUNNER_TEMP/neg"
+          for d in "$pkg" "$neg"; do mkdir -p "$d"; cp -R code results figures "$d/"; done
+          test "$(grep -c '    claimed = mp.sqrt(k \* mp.mpf(L)) - L - mp.log(k) - 3' "$neg/code/check_extensions.py")" = 1
+          sed -i 's|    claimed = mp.sqrt(k \* mp.mpf(L)) - L - mp.log(k) - 3|    claimed = mp.sqrt(k * mp.mpf(L)) - L - mp.log(k) - 1|' "$neg/code/check_extensions.py"
+          cd "$pkg"
+          python3 -I -B -O code/verify.py --output results/verification.json | tee "$RUNNER_TEMP/verify.out"
+          test "$(grep -c ': PASS' "$RUNNER_TEMP/verify.out")" = 6
+          python3 -I -B -O code/check_extensions.py --output results/extensions.json | tail -1 | grep -qx 'ALL CHECKS PASSED'
+          python3 -I -B -O code/fingerprints.py --output results/fingerprints.json
+          cd "$neg"; if python3 -I -B -O code/check_extensions.py --output results/extensions.json > /dev/null; then echo "negative control (constant 3 -> 1 in inequality (7.5)) not detected"; exit 1; fi
+          echo "negative control detected"
+      - name: Compare with the recorded outputs
+        run: |
+          # Policy (also in README.md, ENVIRONMENT.txt and REPLAY_RECEIPT.md): extensions.json and fingerprints.json
+          # byte-identical (exact and 50-digit arithmetic, no floats); verification.json field by field as in the comparator.
+          cmp results/extensions.json "$RUNNER_TEMP/pkg/results/extensions.json"
+          cmp results/fingerprints.json "$RUNNER_TEMP/pkg/results/fingerprints.json"
+          cmp results/initial-failed-run.json "$RUNNER_TEMP/pkg/results/initial-failed-run.json"
+          python3 -I "$RUNNER_TEMP/compare_verification.py" results/verification.json "$RUNNER_TEMP/pkg/results/verification.json"
+          echo "PASS: outputs agree with results/ under the declared policy; negative control detected"
+      - name: Working tree unchanged
+        run: test -z "$(git status --porcelain)"
+  figure:
+    name: Figure script runs (non-blocking; images not compared across platforms)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned versions
+        run: python3 -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 sympy==1.14.0 mpmath==1.3.0 matplotlib==3.10.8
+      - name: Run make_figure.py in a copy
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          mkdir -p "$RUNNER_TEMP/fig" && cp -R code results figures "$RUNNER_TEMP/fig/" && cd "$RUNNER_TEMP/fig"
+          python3 -E -s -B code/make_figure.py
+          test -s figures/sharp-growth.png && test -s figures/sharp-growth.pdf

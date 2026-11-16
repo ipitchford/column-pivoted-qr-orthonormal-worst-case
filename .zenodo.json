@@ -1,0 +1,93 @@
+{
+ "title": "How badly can column-pivoted QR choose rows of an orthonormal basis? The sharp stretched-exponential worst case",
+ "upload_type": "publication",
+ "publication_type": "preprint",
+ "description": "<p><strong>Unrefereed research candidate.</strong> In one sentence: the greedy row-selection rule built into every linear-algebra library, column-pivoted QR, can lose against the best possible choice by a factor of about exp(C&radic;k), with an exact constant C, and never by the 2<sup>k</sup> allowed by the textbook guarantee.</p><p><strong>Context.</strong> Many simulation and data methods keep only k of N coordinates of an N&times;k matrix Q with orthonormal columns (for example the interpolation points of the discrete empirical interpolation method, DEIM). The quality of a choice I is &gamma; = &Vert;Q(I,:)<sup>&minus;1</sup>&Vert;<sub>2</sub>, the factor by which interpolation from the chosen coordinates can be worse than the best approximation; some choice always has &gamma; &le; &radic;(k(N&minus;k+1)). The rule used in practice is column-pivoted QR (QRCP) on Q<sup>*</sup>, which repeatedly picks the coordinate least explained by those already chosen. Drma&#269; and Gugercin (SIAM J. Sci. Comput., 2016) proved a bound that grows like 2<sup>k</sup>. Damle and Kressner asked whether QRCP meets the existence scale on orthonormal rows (Problem 4.3 of Amsel et al., arXiv:2602.05394). Chen, Liu, He and Dong (arXiv:2606.02484) gave the first answer, negative: their examples exceed every polynomial multiple of the existence scale, and their construction already gives growth of order exp(c&radic;k) with a small c. Damle (arXiv:2607.13532) showed that the Bischof&ndash;Stewart rule meets the existence scale.</p><p><strong>Results.</strong> Let the coherence &mu;(Q) be the largest row energy divided by the average. (1) Theorem 2.3: if &mu;(Q) &le; H, every legal QRCP selection, with any tie-breaking, has &gamma; &le; &radic;(e(N&minus;k+1)) exp(C(H)&radic;k), with an explicit constant C(H): C(1) = 2 (equal row energies), C(2) &asymp; 2.25, and C(H)<sup>2</sup>/log H &rarr; 1. This is the first bound below exponential in k for QRCP on orthonormal rows. (2) The constant is sharp: the worst case satisfies log G<sub>k</sub>(H) = (C(H)+o(1))&radic;k, with real examples of fewer than 3k<sup>3</sup> rows built from a generalised Kahan matrix; for H &gt; 1 their pivots are unique, and at H = 1 they use the smallest-label tie rule. (3) Corollary 2.6: since &mu;(Q) &le; N/k, the bound holds for every input with C(N/k). (4) Theorem 2.7 and Corollary 2.8: without any coherence assumption the worst case is exp(&Theta;(&radic;(k log(N/k)))) once N &ge; k<sup>2+&epsilon;</sup> (and log N = o(k)), and exp((1+o(1))&radic;(k log N)) when log N/log k &rarr; &infin;. (5) Theorem 7.1: an a posteriori bound &gamma; &le; (&radic;e/d<sub>k</sub>) exp(&radic;((k&minus;1)L)) from the observed pivot range L, with an optimal coefficient. At k = 100 the new bound allows about 10<sup>9</sup> to 10<sup>10</sup> where the classical bound allowed about 10<sup>30</sup>; it is smaller than the classical bound from k = 13 at H = 1.</p><p><strong>Limits.</strong> Exact arithmetic and worst cases only; typical inputs behave far better, and floating-point QRCP is not analysed. Sharpness is on the logarithmic scale: upper and lower bounds still differ by a factor polynomial in k, and the limits are approached slowly. The worst examples need N of order k<sup>3</sup>; whether growth of order exp(c&radic;k) occurs when N is a fixed multiple of k is open.</p><p><strong>Contents.</strong> The paper (LaTeX source and PDF) and its figure; check scripts with their recorded outputs (verify.py: exact rational Kahan identities, 25 orthonormal inputs, eleven completed examples at k = 16 to 128 factorised by two QRCP implementations, a retained failed candidate as negative control, large-rank core sums against 80-digit evaluations and the endpoint constructions; check_extensions.py: 50-digit checks of C(H), Table 2, the Kahan family for k = 6 to 16 and inequality (7.5) on 779 grid points; fingerprints.py); the figure script; the bibliography; a machine-readable index; a research-gate record; a review summary; a replay receipt and SHA-256 sums. Checks raise SystemExit and stay active under python -O.</p><p><strong>Assurance.</strong> Written proofs, with finite computational checks. Internal AI-assisted review only: five reviewer roles, an adversarial review by a second AI model, a clean replay, one revision round with extensions, then a re-review and a proof audit of the new proofs by Claude verification passes (the second-model audit of the new proofs was not run because of a usage limit). Not peer review, independent reproduction or formal verification. The first answer to Problem 4.3 is due to Chen, Liu, He and Dong. Creator: Anonymous. Text and data CC0-1.0; code MIT.</p>",
+ "creators": [
+  {
+   "name": "Anonymous"
+  }
+ ],
+ "access_right": "open",
+ "license": "cc-zero",
+ "version": "0.1.0-candidate",
+ "publication_date": "2026-11-16",
+ "keywords": [
+  "column-pivoted QR",
+  "discrete empirical interpolation",
+  "DEIM",
+  "coherence",
+  "Kahan matrix",
+  "triangular inverse",
+  "subset selection",
+  "worst-case analysis"
+ ],
+ "notes": "Subtitle: Greedy row selection loses at most exp(C(H)√k) against the best possible, with an exact constant, not 2^k. Code (code/*.py and the CI workflow) is MIT; prose, manuscript, figure and data are CC0-1.0.",
+ "related_identifiers": [
+  {
+   "identifier": "https://github.com/ipitchford/column-pivoted-qr-orthonormal-worst-case/tree/v0.1.0-candidate",
+   "relation": "isSupplementTo",
+   "scheme": "url"
+  },
+  {
+   "identifier": "https://evidencepress.org/releases/column-pivoted-qr-orthonormal-worst-case/",
+   "relation": "isDocumentedBy",
+   "scheme": "url"
+  },
+  {
+   "identifier": "arXiv:2602.05394",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2606.02484",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2607.13532",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2607.26863",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2608.29595",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "10.1137/15m1019271",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1137/050639193",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/s0893-9659(97)00098-0",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1137/0917055",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.4153/cmb-1966-083-2",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1145/1242524.1242528",
+   "relation": "references",
+   "scheme": "doi"
+  }
+ ]
+}
