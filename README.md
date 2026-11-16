@@ -118,8 +118,10 @@ which records the interpreter version (exact and 50-digit mpmath arithmetic; no 
 `results/initial-failed-run.json` is a fixed record and is not regenerated. `results/verification.json` is compared field by field with the timing, timestamp, interpreter and
 platform fields ignored (`run_utc`, `elapsed_seconds`, `versions`, `vector_arithmetic`, `root_solver_evaluations`,
 `root_solver_message`); exact rational strings, integers, booleans and structure must match exactly, numbers within
-relative 1e-9 (absolute floor 1e-12) and decimal numeric strings within relative 1e-12, and every `relative_disagreement` field must stay below 2e-14
-(the script's own criterion). Reason: the large-rank core sums use NumPy `longdouble`, which is 80-bit on x86-64 Linux and
+relative 1e-9 (absolute floor 1e-12) and decimal numeric strings within relative 1e-12, every `relative_disagreement` field must stay below 2e-14
+(the script's own criterion), and the finite-difference rounding diagnostics (`frobenius_error`, `trace_derivative`,
+`derivative_frobenius_error`) must stay below 2e-8 in absolute value (the script's own threshold) without being compared
+with each other, because they measure rounding noise (Linux CI gives values such as 2.3e-11 where macOS gives 1.3e-11). Reason: the large-rank core sums use NumPy `longdouble`, which is 80-bit on x86-64 Linux and
 plain double precision on arm64 macOS, so last digits can differ; the root solver may also use a different number of
 evaluations. The figure is regenerated in a non-blocking CI job and not compared.
 

@@ -22,5 +22,6 @@ were added or changed; the scripts and recorded outputs are byte-identical to th
 Cross-platform policy (declared before tagging; also in CI, README.md and ENVIRONMENT.txt): `fingerprints.json`
 byte-identical and `extensions.json` identical apart from its `python` (interpreter version) field; `verification.json` field by field, with structure,
 booleans, integers and non-numeric strings exact, JSON numbers within relative 1e-9 (absolute floor 1e-12), decimal
-numeric strings within relative 1e-12, `relative_disagreement` fields below 2e-14, and time, interpreter, platform and
+numeric strings within relative 1e-12, `relative_disagreement` fields below 2e-14, finite-difference rounding
+diagnostics (`frobenius_error`, `trace_derivative`, `derivative_frobenius_error`) below 2e-8 in both runs, and time, interpreter, platform and
 root-solver bookkeeping fields ignored. The figure is regenerated on Linux in a non-blocking job and not compared.

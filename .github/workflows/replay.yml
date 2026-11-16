@@ -23,13 +23,16 @@ jobs:
           """Compare a replayed results/verification.json with the recorded one under the declared cross-platform policy:
           structure, booleans, integers and non-numeric strings (including exact rationals) exactly; JSON numbers within relative
           1e-9 (absolute floor 1e-12); decimal numeric strings within relative 1e-12; every relative_disagreement field below 2e-14
-          in both files; fields that record time, interpreter, platform or solver bookkeeping ignored.
+          in both files; the finite-difference rounding diagnostics (frobenius_error, trace_derivative,
+          derivative_frobenius_error) must be below 2e-8 in absolute value in both files (the script's own pass threshold) and are not
+          compared with each other; fields that record time, interpreter, platform or solver bookkeeping ignored.
           Usage: compare_verification.py RECORDED REPLAYED. Exit 0 if equivalent, 1 otherwise (no assert)."""
           import json, math, re, sys
+          FD = {'frobenius_error', 'trace_derivative', 'derivative_frobenius_error'}
           IGNORE = {'run_utc', 'elapsed_seconds', 'versions', 'vector_arithmetic', 'root_solver_evaluations', 'root_solver_message'}
           DEC = re.compile(r'-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?')
           rec, new = json.load(open(sys.argv[1])), json.load(open(sys.argv[2]))
-          bad, n = [], {'num': 0, 'numstr': 0, 'disagreement': 0}
+          bad, n = [], {'num': 0, 'numstr': 0, 'disagreement': 0, 'fd': 0}
           def walk(a, b, p, key=''):
               if isinstance(a, dict) and isinstance(b, dict):
                   for k in sorted(set(a) | set(b)):
@@ -41,6 +44,9 @@ jobs:
                   for i, (u, v) in enumerate(zip(a, b)): walk(u, v, f'{p}[{i}]', key)
               elif isinstance(a, bool) or isinstance(b, bool):
                   if a is not b: bad.append(f'bool {p}: {a} vs {b}')
+              elif key in FD and isinstance(a, float) and isinstance(b, float):
+                  n['fd'] += 1
+                  if not (abs(a) < 2e-8 and abs(b) < 2e-8): bad.append(f'finite-difference diagnostic {p}: {a} vs {b}')
               elif isinstance(a, (int, float)) and isinstance(b, (int, float)):
                   n['num'] += 1
                   if isinstance(a, int) and isinstance(b, int):
@@ -58,7 +64,7 @@ jobs:
           walk(rec, new, '')
           if new.get('passed') is not True: bad.append('replayed run did not pass')
           if bad: print('MISMATCH', sys.argv[2], len(bad), bad[:20]); sys.exit(1)
-          print(f"equivalent: {sys.argv[2]} ({n['num']} numbers within rel 1e-9/abs 1e-12; {n['numstr']} differing numeric strings within rel 1e-12; {n['disagreement']} relative_disagreement fields < 2e-14; everything else exact; ignored {sorted(IGNORE)})")
+          print(f"equivalent: {sys.argv[2]} ({n['num']} numbers within rel 1e-9/abs 1e-12; {n['numstr']} differing numeric strings within rel 1e-12; {n['disagreement']} relative_disagreement fields < 2e-14; {n['fd']} finite-difference diagnostics < 2e-8; everything else exact; ignored {sorted(IGNORE)})")
           PY
       - name: Run the check scripts under -O in a copy; run the negative controls
         env:
