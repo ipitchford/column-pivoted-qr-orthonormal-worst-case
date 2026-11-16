@@ -113,8 +113,9 @@ Invoke the interpreter as `python` inside `uv run` and check `python --version`:
 resolves to another version.
 
 Cross-platform comparison policy (declared before tagging; the same policy is used in CI and in `REPLAY_RECEIPT.md`):
-`results/extensions.json`, `results/fingerprints.json` and `results/initial-failed-run.json` must be byte-identical
-(exact and 50-digit mpmath arithmetic; no floating-point numbers). `results/verification.json` is compared field by field with the timing, timestamp, interpreter and
+`results/fingerprints.json` must be byte-identical and `results/extensions.json` identical apart from its `python` field,
+which records the interpreter version (exact and 50-digit mpmath arithmetic; no floating-point numbers);
+`results/initial-failed-run.json` is a fixed record and is not regenerated. `results/verification.json` is compared field by field with the timing, timestamp, interpreter and
 platform fields ignored (`run_utc`, `elapsed_seconds`, `versions`, `vector_arithmetic`, `root_solver_evaluations`,
 `root_solver_message`); exact rational strings, integers, booleans and structure must match exactly, numbers within
 relative 1e-9 (absolute floor 1e-12) and decimal numeric strings within relative 1e-12, and every `relative_disagreement` field must stay below 2e-14

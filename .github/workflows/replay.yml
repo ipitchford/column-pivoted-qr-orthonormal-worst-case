@@ -77,9 +77,9 @@ jobs:
           echo "negative control detected"
       - name: Compare with the recorded outputs
         run: |
-          # Policy (also in README.md, ENVIRONMENT.txt and REPLAY_RECEIPT.md): extensions.json and fingerprints.json
-          # byte-identical (exact and 50-digit arithmetic, no floats); verification.json field by field as in the comparator.
-          cmp results/extensions.json "$RUNNER_TEMP/pkg/results/extensions.json"
+          # Policy (also in README.md, ENVIRONMENT.txt and REPLAY_RECEIPT.md): fingerprints.json byte-identical; extensions.json
+          # identical apart from its "python" field (interpreter version); verification.json field by field as in the comparator.
+          python3 -I -c 'import json, sys; a, b = (json.load(open(p)) for p in sys.argv[1:]); a.pop("python"); b.pop("python"); sys.exit(0 if a == b else "extensions.json differs beyond the python field")' results/extensions.json "$RUNNER_TEMP/pkg/results/extensions.json"
           cmp results/fingerprints.json "$RUNNER_TEMP/pkg/results/fingerprints.json"
           cmp results/initial-failed-run.json "$RUNNER_TEMP/pkg/results/initial-failed-run.json"
           python3 -I "$RUNNER_TEMP/compare_verification.py" results/verification.json "$RUNNER_TEMP/pkg/results/verification.json"

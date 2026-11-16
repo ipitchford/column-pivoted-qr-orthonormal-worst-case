@@ -5,8 +5,9 @@ Packages: numpy 2.3.5, scipy 1.17.0, sympy 1.14.0, mpmath 1.3.0, matplotlib 3.10
 NumPy longdouble on this host: float64 (on x86-64 Linux it is 80-bit extended precision).
 GitHub CI: ubuntu-latest, actions/setup-python 3.12, pip-installed pins as above.
 Cross-platform comparison (declared before tagging; same policy in CI, README.md and REPLAY_RECEIPT.md):
-- results/extensions.json, results/fingerprints.json and results/initial-failed-run.json must be byte-identical (exact
-  rational and 50-digit mpmath arithmetic; these files contain no floating-point numbers).
+- results/fingerprints.json must be byte-identical, and results/extensions.json identical apart from its "python" field,
+  which records the interpreter version (exact rational and 50-digit mpmath arithmetic; these files contain no
+  floating-point numbers). results/initial-failed-run.json is a fixed record of the initial run and is not regenerated.
 - results/verification.json is compared field by field: structure, booleans, integers and non-numeric strings
   (including exact rationals) exactly; JSON numbers within relative 1e-9 with absolute floor 1e-12; decimal numeric
   strings within relative 1e-12; every relative_disagreement field below 2e-14 in both files (the script's own

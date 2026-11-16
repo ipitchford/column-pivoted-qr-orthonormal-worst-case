@@ -19,8 +19,8 @@ directory the package copy, CPython 3.12.11 (uv; `sys.version` printed inside th
 After the replay only the title-page version/DOI line of the manuscript (and the rebuilt PDF), README and metadata files
 were added or changed; the scripts and recorded outputs are byte-identical to the replayed candidate.
 
-Cross-platform policy (declared before tagging; also in CI, README.md and ENVIRONMENT.txt): `extensions.json`,
-`fingerprints.json` and `initial-failed-run.json` byte-identical; `verification.json` field by field, with structure,
+Cross-platform policy (declared before tagging; also in CI, README.md and ENVIRONMENT.txt): `fingerprints.json`
+byte-identical and `extensions.json` identical apart from its `python` (interpreter version) field; `verification.json` field by field, with structure,
 booleans, integers and non-numeric strings exact, JSON numbers within relative 1e-9 (absolute floor 1e-12), decimal
 numeric strings within relative 1e-12, `relative_disagreement` fields below 2e-14, and time, interpreter, platform and
 root-solver bookkeeping fields ignored. The figure is regenerated on Linux in a non-blocking job and not compared.
